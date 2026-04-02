@@ -20,7 +20,14 @@ async function toggleRecording() {
 
 async function startRecording() {
     try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const stream = await navigator.mediaDevices.getUserMedia({
+            audio: {
+                echoCancellation: false,
+                noiseSuppression: false,
+                autoGainControl: false,
+                channelCount: 1
+            }
+        });
         mediaRecorder = new MediaRecorder(stream);
         
         let chunks = [];
@@ -30,8 +37,8 @@ async function startRecording() {
             if (event.data.size > 0 && isRecording) {
                 chunks.push(event.data);
                 
-                // We receive a chunk every 5 seconds
-                timeElapsed += 5;
+                // We receive a chunk every 3 seconds
+                timeElapsed += 3;
                 
                 const cumulativeBlob = new Blob(chunks, { type: 'audio/webm' });
                 
@@ -43,17 +50,17 @@ async function startRecording() {
                 
                 if (matched) {
                     stopRecording();
-                } else if (!matched && timeElapsed >= 20) {
+                } else if (!matched && timeElapsed >= 21) {
                     // Maximum duration reached and still no match
                     if (isRecording) {
                         stopRecording();
                         statusText.innerText = "Tap to Listen";
                         trackTitle.innerText = "No Match Found";
-                        trackDetails.innerText = `Searched 20 seconds. Please try again.`;
+                        trackDetails.innerText = `Searched 21 seconds. Please try again.`;
                         resultCard.classList.remove('hidden');
                     }
                 } else {
-                    // We haven't reached 15 seconds, revert text back to Listening...
+                    // We haven't reached 21 seconds, revert text back to Listening...
                     if (isRecording) {
                         statusText.innerText = "Listening...";
                     }
@@ -61,8 +68,8 @@ async function startRecording() {
             }
         };
 
-        // Request a data chunk every 5000 milliseconds (5 seconds)
-        mediaRecorder.start(5000);
+        // Request a data chunk every 3000 milliseconds (3 seconds)
+        mediaRecorder.start(3000);
         isRecording = true;
         
         // UI Updates
