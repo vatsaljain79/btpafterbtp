@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shazam Web - Audio Fingerprinting</title>
+    <!-- Google Fonts for typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Shazam<span class="highlight">Py</span></h1>
+            <p>100% Python Audio Fingerprinting Engine</p>
+        </header>
+        
+        <main>
+            <div class="record-container">
+                <button id="record-btn" class="record-btn">
+                    <div class="inner-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mic-icon">
+                            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line>
+                            <line x1="8" y1="23" x2="16" y2="23"></line>
+                        </svg>
+                    </div>
+                    <div class="ripple"></div>
+                    <div class="ripple delay-1"></div>
+                    <div class="ripple delay-2"></div>
+                </button>
+                <div id="status-text" class="status-text">Tap to Listen</div>
+            </div>
+
+            <div id="result-card" class="result-card hidden">
+                <div class="album-art-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M9 18V5l12-2v13"></path>
+                        <circle cx="6" cy="18" r="3"></circle>
+                        <circle cx="18" cy="16" r="3"></circle>
+                    </svg>
+                </div>
+                <div class="track-info">
+                    <h2 id="track-title">Song Title</h2>
+                    <p id="track-details" class="track-details">Score: 0 | Time: 0ms</p>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            Built with generic audio hashing
+        </footer>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
