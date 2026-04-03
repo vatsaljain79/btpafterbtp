@@ -313,8 +313,8 @@ last try/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/vatsaljain79/btpafterbtp.git
-cd btpafterbtp
+git clone https://github.com/vatsaljain79/Shazam_Musical_App.git
+cd Shazam_Musical_App
 ```
 
 ### 2. Create a virtual environment
